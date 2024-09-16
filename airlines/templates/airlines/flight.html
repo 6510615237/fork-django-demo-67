@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Detail</title>
+</head>
+<body>
+    <h1>Flight {{ flight.id }}</h1>
+    <ul>
+        <li>Origin: {{ flight.origin }}</li>
+        <li>Destination: {{ flight.destination }}</li>
+        <li>Duration: {{ flight.duration }}</li>
+    </ul>
+
+    <h2>Passengers:</h2>
+    <ul>
+        {% for passenger in flight.passengers.all %}
+            <li>{{ passenger }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add Passengers</h2>
+    <form action="{% url 'book' flight.id %}" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <select name="passenger">
+            {% for passenger in nonpassengers %}
+                <option value="{{ passenger.id }}">{{ passenger }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Add Passenger</button>
+</body>
+</html>
