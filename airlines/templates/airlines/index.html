@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flights</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block 'title' %}
+Flight Lists
+{% endblock %}
+
+{% block 'content' %}
     <h3>Flight Lists</h3>
     <ul>
         {% for flight in flights %}
-            <li><a href="{% url 'flight' flight.id %}">{{ flight }}</a></li>
+            <li><a href="{% url 'airlines:flight' flight.id %}">{{ flight }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

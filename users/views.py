@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='users/login/')
 def index(request):
+    user = request.user
+   
     return render(request, "users/index.html")
 
 
@@ -13,7 +17,7 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect("index")
+            return redirect("users:index")
         else:
             return render(request, "users/login.html", {
                 "message": "Invalid credentials."

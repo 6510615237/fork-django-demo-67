@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Detail</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block 'title' %}
+Flight Detail
+{% endblock %}
+
+{% block 'content' %}
     <h1>Flight {{ flight.id }}</h1>
     <ul>
         <li>Origin: {{ flight.origin }}</li>
@@ -21,7 +20,7 @@
     </ul>
 
     <h2>Add Passengers</h2>
-    <form action="{% url 'book' flight.id %}" method="post">
+    <form action="{% url 'airlines:book' flight.id %}" method="post">
         {% csrf_token %}
         <label for="name">Name:</label>
         <select name="passenger">
@@ -30,5 +29,7 @@
             {% endfor %}
         </select>
         <button type="submit">Add Passenger</button>
-</body>
-</html>
+    </form> 
+
+    <a href="{% url 'airlines:index' %}">Back to Flights</a>
+{% endblock %}

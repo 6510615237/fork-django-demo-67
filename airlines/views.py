@@ -23,7 +23,7 @@ def book(request, flight_id):
     if request.method == "POST":
         passenger = Passenger.objects.get(pk=int(request.POST["passenger"]))
         passenger.flights.add(flight)
-        return redirect("flight", flight_id=flight_id)
+        return redirect("airlines:flight", flight_id=flight_id)
     
     return render(request, "airlines/book.html", {
         "flight": flight
